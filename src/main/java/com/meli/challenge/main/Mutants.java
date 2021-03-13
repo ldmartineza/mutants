@@ -15,5 +15,9 @@ public class Mutants {
         // It should be false
         String[] dnaNotMutant = {"ATGCGA","CAGTGC","TTATTT","AGACGG","GCGTCA","TCACTG"};
         System.out.println(mutantValidatorService.isMutant(dnaNotMutant));
+
+        // It should be true
+        String[] dnaMutant2 = {"ATGCCA","CAGAGC","TTATGT","AAAATT","CTCTTA","TCACTG"};
+        System.out.println(mutantValidatorService.isMutant(dnaMutant2));
     }
 }
