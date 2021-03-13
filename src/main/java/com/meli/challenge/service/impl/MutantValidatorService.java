@@ -35,9 +35,7 @@ public class MutantValidatorService implements IMutantValidatorService {
                 row.add(currentChar);
 
                 updateChar(currentChar, currentRow, currentColumn, dnaMatrix);
-                if (checkSequenceInChar(currentChar, MIN_SEQUENCE_CHAR)) {
-                    consecutiveSequences++;
-                }
+                consecutiveSequences += checkSequenceInChar(currentChar, MIN_SEQUENCE_CHAR);
                 if (moreThanOneSequence.test(consecutiveSequences)) break;
 
                 currentColumn++;
@@ -80,13 +78,14 @@ public class MutantValidatorService implements IMutantValidatorService {
         }
     }
 
-    private boolean checkSequenceInChar(DNACharSequence currentChar, int minSequenceChar) {
-        return currentChar.getDirections().values().stream()
-                .anyMatch(sequenceLength -> sequenceLength == minSequenceChar);
+    private int checkSequenceInChar(DNACharSequence currentChar, int minSequenceChar) {
+        return (int)currentChar.getDirections().values().stream()
+                .filter(sequenceLength -> sequenceLength == minSequenceChar)
+                .count();
     }
 
     private boolean isValidInput(String[] dna) {
-        if (dna == null || dna.length == 0) return false;
+        if (dna == null || dna.length < MIN_SEQUENCE_CHAR) return false;
 
         int expectedLength = dna.length;
         for(String row : dna) {
