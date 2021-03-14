@@ -10,8 +10,8 @@ import java.util.Map;
 @Data
 @Builder
 public class DNACharSequence {
-    Character base;
-    Map<Direction, Integer> directions;
+    private Character base;
+    private Map<Direction, Integer> directions;
 
     public boolean isSameBase(char base){
         return this.base == base;
