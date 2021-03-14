@@ -3,6 +3,7 @@ package com.meli.challenge.mutants.service.impl;
 import com.meli.challenge.mutants.dto.DNACharSequence;
 import com.meli.challenge.mutants.enums.Direction;
 import com.meli.challenge.mutants.service.IMutantValidatorService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ import java.util.function.Predicate;
 @Service
 public class MutantValidatorService implements IMutantValidatorService {
 
-    private static final int MIN_SEQUENCE_CHAR = 4;
+    @Value("${min-sequence-length:4}")
+    private int minSequenceLength;
+
     private static final int BASE_SEQUENCE = 1;
 
     @Override
@@ -37,7 +40,7 @@ public class MutantValidatorService implements IMutantValidatorService {
                 row.add(currentChar);
 
                 updateChar(currentChar, currentRow, currentColumn, dnaMatrix);
-                consecutiveSequences += checkSequenceInChar(currentChar, MIN_SEQUENCE_CHAR);
+                consecutiveSequences += checkSequenceInChar(currentChar, minSequenceLength);
                 if (moreThanOneSequence.test(consecutiveSequences)) break;
 
                 currentColumn++;
@@ -87,7 +90,7 @@ public class MutantValidatorService implements IMutantValidatorService {
     }
 
     private boolean isValidInput(String[] dna) {
-        if (dna == null || dna.length < MIN_SEQUENCE_CHAR) return false;
+        if (dna == null || dna.length < minSequenceLength) return false;
 
         int expectedLength = dna.length;
         for(String row : dna) {

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/mutant")
 public class MutantController implements IMutantController {
@@ -20,7 +22,9 @@ public class MutantController implements IMutantController {
 
     @Override
     @PostMapping
-    public ResponseEntity<Void> checkMutantDNA(@RequestBody ValidateMutantRequest validateMutantRequest) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    public ResponseEntity<Void> checkMutantDNA(@RequestBody @Valid ValidateMutantRequest validateMutantRequest) {
+        String[] dnaArray = validateMutantRequest.getDna().toArray(new String[0]);
+        return ResponseEntity.status(mutantValidatorService.isMutant(dnaArray) ? HttpStatus.OK : HttpStatus.FORBIDDEN)
+                .build();
     }
 }

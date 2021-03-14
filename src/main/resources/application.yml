@@ -9,3 +9,5 @@ spring:
   flyway:
     schemas: mutants_db
     enabled: false
+mutant:
+  min-sequence-length: 4
