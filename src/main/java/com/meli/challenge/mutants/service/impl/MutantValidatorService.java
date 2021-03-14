@@ -1,14 +1,16 @@
-package com.meli.challenge.service.impl;
+package com.meli.challenge.mutants.service.impl;
 
-import com.meli.challenge.dto.DNACharSequence;
-import com.meli.challenge.enums.Direction;
-import com.meli.challenge.service.IMutantValidatorService;
+import com.meli.challenge.mutants.dto.DNACharSequence;
+import com.meli.challenge.mutants.enums.Direction;
+import com.meli.challenge.mutants.service.IMutantValidatorService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 
+@Service
 public class MutantValidatorService implements IMutantValidatorService {
 
     private static final int MIN_SEQUENCE_CHAR = 4;

@@ -1,4 +1,4 @@
-package com.meli.challenge.enums;
+package com.meli.challenge.mutants.enums;
 
 public enum Direction {
     UP,

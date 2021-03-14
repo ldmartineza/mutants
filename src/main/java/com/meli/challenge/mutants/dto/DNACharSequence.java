@@ -1,6 +1,6 @@
-package com.meli.challenge.dto;
+package com.meli.challenge.mutants.dto;
 
-import com.meli.challenge.enums.Direction;
+import com.meli.challenge.mutants.enums.Direction;
 import lombok.Builder;
 import lombok.Data;
 

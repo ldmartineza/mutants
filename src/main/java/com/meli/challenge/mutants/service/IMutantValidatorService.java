@@ -1,4 +1,4 @@
-package com.meli.challenge.service;
+package com.meli.challenge.mutants.service;
 
 public interface IMutantValidatorService {
 
