@@ -8,6 +8,6 @@ spring:
     open-in-view: false
   flyway:
     schemas: mutants_db
-    enabled: false
+    enabled: true
 mutant:
   min-sequence-length: 4

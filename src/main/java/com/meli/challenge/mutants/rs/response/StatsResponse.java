@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 public class StatsResponse {
 
     @ApiModelProperty(value = "The amount of mutants scanned", required = true)
-    private int countMutantDna;
+    private long countMutantDna;
     @ApiModelProperty(value = "The amount of humans scanned", required = true)
-    private int countHumanDna;
+    private long countHumanDna;
     @ApiModelProperty(value = "The ratio between mutants and humans scanned", required = true)
     private double ratio;
 }

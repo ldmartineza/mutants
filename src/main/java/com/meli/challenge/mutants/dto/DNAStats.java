@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class DNAStats {
-    private int countMutantDna;
-    private int countHumanDna;
+    private long countMutantDna;
+    private long countHumanDna;
     private double ratio;
 }
