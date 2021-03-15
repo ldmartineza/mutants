@@ -2,7 +2,9 @@ package com.meli.challenge.mutants.service.impl;
 
 import com.meli.challenge.mutants.dto.DNACharSequence;
 import com.meli.challenge.mutants.enums.Direction;
+import com.meli.challenge.mutants.service.IMutantStatisticService;
 import com.meli.challenge.mutants.service.IMutantValidatorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +19,17 @@ public class MutantValidatorService implements IMutantValidatorService {
     @Value("${min-sequence-length:4}")
     private int minSequenceLength;
 
+    @Autowired
+    private IMutantStatisticService mutantStatisticService;
+
     private static final int BASE_SEQUENCE = 1;
 
     @Override
     public boolean isMutant(String[] dna) {
-        if (!isValidInput(dna)) return false;
+        if (!isValidInput(dna)){
+            mutantStatisticService.addStat(dna, false);
+            return false;
+        }
 
         Predicate<Integer> moreThanOneSequence = sequence -> sequence > 1;
         List<List<DNACharSequence>> dnaMatrix = new ArrayList<>();
@@ -50,7 +58,9 @@ public class MutantValidatorService implements IMutantValidatorService {
             currentRow++;
         }
 
-        return moreThanOneSequence.test(consecutiveSequences);
+        boolean result = moreThanOneSequence.test(consecutiveSequences);
+        mutantStatisticService.addStat(dna, result);
+        return result;
     }
 
     private void updateChar(DNACharSequence currentChar, int currentRow, int currentColumn, List<List<DNACharSequence>> dnaMatrix) {
