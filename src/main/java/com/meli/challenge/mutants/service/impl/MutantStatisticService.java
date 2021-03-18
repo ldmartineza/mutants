@@ -25,7 +25,7 @@ public class MutantStatisticService implements IMutantStatisticService {
         long totalRecords = dnaBasicInfoRepository.count();
         long mutantRecords = dnaBasicInfoRepository.count(queryExample);
         long humanRecords = totalRecords - mutantRecords;
-        double ratio = totalRecords != 0 ? (double) mutantRecords / (double) totalRecords : 0;
+        double ratio = humanRecords != 0 ? (double) mutantRecords / (double) humanRecords : 0;
 
         return DNAStats.builder()
                 .countHumanDna(humanRecords)
