@@ -17,8 +17,12 @@ import javax.validation.Valid;
 @RequestMapping("/mutant")
 public class MutantController implements IMutantController {
 
+    private final IMutantValidatorService mutantValidatorService;
+
     @Autowired
-    private IMutantValidatorService mutantValidatorService;
+    public MutantController(IMutantValidatorService mutantValidatorService) {
+        this.mutantValidatorService = mutantValidatorService;
+    }
 
     @Override
     @PostMapping

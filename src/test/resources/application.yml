@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:mutants_db;DATABASE_TO_UPPER=false
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
+  jpa:
+    open-in-view: false
+  flyway:
+    schemas: mutants_db
+    enabled: true
+mutant:
+  min-sequence-length: 4

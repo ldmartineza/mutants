@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/stats")
 public class StatsController implements IStatsController {
 
-    @Autowired
-    private IMutantStatisticService mutantStatisticService;
+    private final IMutantStatisticService mutantStatisticService;
+    private final IStatsMapper statsMapper;
 
     @Autowired
-    private IStatsMapper statsMapper;
+    public StatsController(IMutantStatisticService mutantStatisticService, IStatsMapper statsMapper) {
+        this.mutantStatisticService = mutantStatisticService;
+        this.statsMapper = statsMapper;
+    }
 
     @Override
     @GetMapping

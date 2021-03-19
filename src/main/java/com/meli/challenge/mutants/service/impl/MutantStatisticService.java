@@ -14,8 +14,12 @@ import java.util.stream.Stream;
 @Service
 public class MutantStatisticService implements IMutantStatisticService {
 
+    private final IDNABasicInfoRepository dnaBasicInfoRepository;
+
     @Autowired
-    private IDNABasicInfoRepository dnaBasicInfoRepository;
+    public MutantStatisticService(IDNABasicInfoRepository dnaBasicInfoRepository) {
+        this.dnaBasicInfoRepository = dnaBasicInfoRepository;
+    }
 
     @Override
     public DNAStats getStats() {
@@ -26,7 +30,7 @@ public class MutantStatisticService implements IMutantStatisticService {
         long totalRecords = dnaBasicInfoRepository.count();
         long mutantRecords = dnaBasicInfoRepository.count(queryExample);
         long humanRecords = totalRecords - mutantRecords;
-        double ratio = humanRecords != 0 ? (double) mutantRecords / (double) humanRecords : 0;
+        double ratio = humanRecords != 0 ? (double) mutantRecords / (double) humanRecords : (double) mutantRecords;
 
         return DNAStats.builder()
                 .countHumanDna(humanRecords)

@@ -16,11 +16,14 @@ import java.util.function.Predicate;
 @Service
 public class MutantValidatorService implements IMutantValidatorService {
 
-    @Value("${min-sequence-length:4}")
-    private int minSequenceLength;
+    private final int minSequenceLength;
+    private final IMutantStatisticService mutantStatisticService;
 
     @Autowired
-    private IMutantStatisticService mutantStatisticService;
+    public MutantValidatorService(@Value("${min-sequence-length:4}") int minSequenceLength, IMutantStatisticService mutantStatisticService) {
+        this.minSequenceLength = minSequenceLength;
+        this.mutantStatisticService = mutantStatisticService;
+    }
 
     /**
      * This is the increment on the length to take into account the current cell during scanning
@@ -31,7 +34,7 @@ public class MutantValidatorService implements IMutantValidatorService {
     public boolean isMutant(String[] dna) {
         // The first task is to validate if the array can be navigated
         if (!isValidInput(dna)){
-            mutantStatisticService.addStat(dna, false);
+            if (dna != null) mutantStatisticService.addStat(dna, false);
             return false;
         }
 
