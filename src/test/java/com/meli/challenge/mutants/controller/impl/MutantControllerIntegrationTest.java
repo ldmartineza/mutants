@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -39,9 +41,11 @@ class MutantControllerIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+                .apply(SecurityMockMvcConfigurers.springSecurity()).build();
     }
 
+    @WithMockUser
     @Test
     void checkMutantDNA_ok() throws Exception {
         String[] dna = new String[]{"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"};
@@ -55,6 +59,7 @@ class MutantControllerIntegrationTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
+    @WithMockUser
     @Test
     void checkMutantDNA_forbidden() throws Exception {
         String[] dna = new String[]{"ATGCGA","CAGTGC","TTATTT","AGACGG","GCGTCA","TCACTG"};
@@ -68,6 +73,7 @@ class MutantControllerIntegrationTest {
                 .andExpect(MockMvcResultMatchers.status().isForbidden());
     }
 
+    @WithMockUser
     @Test
     void checkMutantDNA_badRequest() throws Exception {
         ValidateMutantRequest request = new ValidateMutantRequest();

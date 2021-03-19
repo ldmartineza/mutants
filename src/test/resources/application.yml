@@ -9,5 +9,9 @@ spring:
   flyway:
     schemas: mutants_db
     enabled: true
+  security:
+    user:
+      name: mutant
+      password: mutantPass
 mutant:
   min-sequence-length: 4
