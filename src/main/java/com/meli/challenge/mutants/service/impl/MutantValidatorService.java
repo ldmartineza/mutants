@@ -20,7 +20,7 @@ public class MutantValidatorService implements IMutantValidatorService {
     private final IMutantStatisticService mutantStatisticService;
 
     @Autowired
-    public MutantValidatorService(@Value("${min-sequence-length:4}") int minSequenceLength, IMutantStatisticService mutantStatisticService) {
+    public MutantValidatorService(@Value("${mutant.min-sequence-length:4}") int minSequenceLength, IMutantStatisticService mutantStatisticService) {
         this.minSequenceLength = minSequenceLength;
         this.mutantStatisticService = mutantStatisticService;
     }

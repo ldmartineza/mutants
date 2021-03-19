@@ -22,6 +22,9 @@ Before running the application, be sure to set the configuration for your databa
 file. You will need to modify the `spring.datasource` properties, including `username`, `password` and `url`. Also, you can
 pass the proper values via environment variables.
 
+Also, be sure to replace also the security properties `spring.security.user` such as `name` and `password` to ensure the basic
+authentication is available
+
 Use the following command to run the application setting up environment variables
 ```shell
 mvn spring-boot:run -Dspring-boot.run.arguments=--spring.datasource.username=<user>,--spring.datasource.password=<password>,--spring.datasource.url=<databaseUrl>
@@ -54,6 +57,4 @@ To retrieve the stats, use the endpoint
 GET http://localhost:8080/stats
 ```
 
-## Demo
-There is a demo published in the following external link:
-[Demo here](http://mutantschallenge-env-1.eba-gbpepfvp.us-east-2.elasticbeanstalk.com/)
+For further details, check the [Swagger documentation](http://localhost:8080/swagger-ui/index.html#) once the application is deployed
