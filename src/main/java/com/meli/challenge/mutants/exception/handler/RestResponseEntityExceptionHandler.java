@@ -10,6 +10,10 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.Optional;
 
+/**
+ * This is the default error handler for the endpoints/capabilities implemented. It contains a simple implementation to
+ * show validation errors of the request
+ */
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler {
 

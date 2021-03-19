@@ -7,6 +7,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * This is the definition of the response used in the GET /stats request. It uses a snake case strategy to ensure the final
+ * JSON mapping follows the rules/structure defined in the exercise
+ */
 @Data
 @NoArgsConstructor
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)

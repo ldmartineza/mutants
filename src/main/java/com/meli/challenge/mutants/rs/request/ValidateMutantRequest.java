@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
+/**
+ * This is the definition of the request used in the POST /mutants request
+ */
 @Data
 @NoArgsConstructor
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
